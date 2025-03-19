@@ -1,0 +1,9 @@
+:root {
+    --bs-primary: #cb0c9f;
+    --bs-secondary: #8392AB;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #f8f9fa;
+}
