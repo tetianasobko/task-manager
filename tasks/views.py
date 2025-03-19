@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
+from tasks.forms import TaskForm
 from tasks.models import Task, Worker, TaskType, Position
 
 
@@ -29,3 +31,10 @@ class TasksListView(generic.ListView):
 class TaskDetailView(generic.DetailView):
     model = Task
     template_name = "tasks/task_detail.html"
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = "tasks/task_form.html"
+    success_url = reverse_lazy("tasks:task-list")
