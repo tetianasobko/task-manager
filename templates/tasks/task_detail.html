@@ -13,6 +13,14 @@
         <i class="fas fa-arrow-left me-2"></i>Back to Tasks
       </a>
     </div>
+    <div class="col text-end">
+      <div class="d-flex align-items-center justify-content-end gap-2">
+        <a href="{% url 'tasks:task-update' pk=task.id %}" class="btn btn-sm btn-primary">
+          <i class="fas fa-edit me-2"></i>
+          Edit Task
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 
