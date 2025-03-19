@@ -7,3 +7,28 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: #f8f9fa;
 }
+
+.avatar-group {
+    display: inline-block;
+    margin-right: -10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.avatar span {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.tooltip {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
