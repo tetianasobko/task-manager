@@ -29,7 +29,6 @@
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                   Status
                 </th>
-                <th class="text-secondary opacity-7"></th>
               </tr>
               </thead>
               <tbody>
@@ -38,7 +37,12 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ task.name }}</h6>
+                        <h6 class="mb-0 text-sm">
+                          <a href="{% url 'tasks:task-detail' pk=task.id %}"
+                             class="task-link">
+                            {{ task.name }}
+                          </a>
+                        </h6>
                         <p class="text-xs text-secondary mb-0">{{ task.task_type }}</p>
                       </div>
                     </div>
@@ -80,12 +84,6 @@
                         class="badge bg-gradient-{{ task.is_completed|yesno:'success,warning' }} badge-sm">
                       {{ task.is_completed|yesno:'Completed,Pending' }}
                     </span>
-                  </td>
-                  <td class="align-middle">
-                    <a href="#" class="text-secondary font-weight-bold text-xs"
-                       data-toggle="tooltip" data-original-title="Edit task">
-                      View
-                    </a>
                   </td>
                 </tr>
               {% empty %}
