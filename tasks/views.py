@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import generic
 
 from tasks.models import Task, Worker, TaskType, Position
 
@@ -17,3 +18,9 @@ def index(request):
         "pending_tasks": pending_tasks,
     }
     return render(request, "tasks/index.html", context=context)
+
+
+class TasksListView(generic.ListView):
+    model = Task
+    context_object_name = "task_list"
+    template_name = "tasks/task_list.html"

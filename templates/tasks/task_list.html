@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load priority_badge %}
+{% load get_initials %}
+
+{% block content %}
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Tasks</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Task
+                </th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  Assigned To
+                </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Priority
+                </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Deadline
+                </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Status
+                </th>
+                <th class="text-secondary opacity-7"></th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for task in task_list %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{ task.name }}</h6>
+                        <p class="text-xs text-secondary mb-0">{{ task.task_type }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2">
+                      {% for assignee in task.assignees.all %}
+                        <div class="avatar-group">
+                          <div
+                              class="avatar avatar-xs rounded-circle bg-primary"
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="{{ assignee.first_name }} {{ assignee.last_name }}">
+                            <span class="text-white">
+                              {{ assignee|get_initials }}
+                            </span>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span
+                        class="badge badge-sm bg-gradient-{{ task.priority|priority_badge }}">
+                      {{ task.priority }}
+                    </span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">
+                      {{ task.deadline|date:"M d, Y" }}
+                    </span>
+                    <span
+                        class="text-secondary text-xxs opacity-7 d-block mt-0">
+                      {{ task.deadline|date:"g:i A" }}
+                    </span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span
+                        class="badge bg-gradient-{{ task.is_completed|yesno:'success,warning' }} badge-sm">
+                      {{ task.is_completed|yesno:'Completed,Pending' }}
+                    </span>
+                  </td>
+                  <td class="align-middle">
+                    <a href="#" class="text-secondary font-weight-bold text-xs"
+                       data-toggle="tooltip" data-original-title="Edit task">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center py-4">
+                    <p class="text-sm mb-0">No pending tasks found</p>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
