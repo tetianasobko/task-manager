@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -58,3 +59,14 @@ class WorkerListView(generic.ListView):
     model = Worker
     context_object_name = "worker_list"
     template_name = "tasks/worker_list.html"
+
+
+class WorkerDetailView(generic.DetailView):
+    model = get_user_model()
+    template_name = "tasks/worker_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["completed_tasks"] = self.object.tasks.filter(
+            is_completed=True).count()
+        return context
