@@ -23,6 +23,12 @@ def index(request):
     return render(request, "tasks/index.html", context=context)
 
 
+class TaskTypesListView(generic.ListView):
+    model = TaskType
+    context_object_name = "task_type_list"
+    template_name = "tasks/task_type_list.html"
+
+
 class TasksListView(generic.ListView):
     model = Task
     context_object_name = "task_list"
