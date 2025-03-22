@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import Task
+from django.contrib.auth.forms import UserCreationForm
+
+from .models import Task, Worker
+
 
 class TaskForm(forms.ModelForm):
     name = forms.CharField(
@@ -28,4 +31,45 @@ class TaskForm(forms.ModelForm):
         labels = {
             'task_type': '',
             'priority': '',
+        }
+
+
+class WorkerCreateForm(UserCreationForm):
+    first_name = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Enter first name"})
+    )
+    last_name = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Enter last name"})
+    )
+    username = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Enter username"})
+    )
+    email = forms.EmailField(
+        label="",
+        widget=forms.EmailInput(attrs={"placeholder": "Enter email"})
+    )
+    password1 = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(attrs={"placeholder": "Enter password"}),
+    )
+    password2 = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm password"}),
+    )
+
+
+    class Meta(UserCreationForm.Meta):
+        model = Worker
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "email",
+            "position",
+        )
+
+        labels = {
+            "position": ""
         }

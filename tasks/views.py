@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import TaskForm
+from tasks.forms import TaskForm, WorkerCreateForm
 from tasks.models import Task, Worker, TaskType, Position
 
 
@@ -70,3 +70,10 @@ class WorkerDetailView(generic.DetailView):
         context["completed_tasks"] = self.object.tasks.filter(
             is_completed=True).count()
         return context
+
+
+class WorkerCreateView(generic.CreateView):
+    model = get_user_model()
+    form_class = WorkerCreateForm
+    template_name = "tasks/worker_create_form.html"
+    success_url = reverse_lazy("tasks:worker-list")
