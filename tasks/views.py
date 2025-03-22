@@ -36,17 +36,23 @@ class TaskTypesCreateView(generic.CreateView):
     success_url = reverse_lazy("tasks:task-types-list")
 
 
+class TaskTypesUpdateView(generic.UpdateView):
+    model = TaskType
+    fields = "__all__"
+    template_name = "tasks/task_type_form.html"
+    success_url = reverse_lazy("tasks:task-types-list")
+
+
 class TaskTypesDeleteView(generic.DeleteView):
     model = TaskType
     template_name = "tasks/task_type_confirm_delete.html"
     success_url = reverse_lazy("tasks:task-types-list")
 
 
-class TaskTypesUpdateView(generic.UpdateView):
-    model = TaskType
-    fields = "__all__"
-    template_name = "tasks/task_type_form.html"
-    success_url = reverse_lazy("tasks:task-types-list")
+class PositionListView(generic.ListView):
+    model = Position
+    context_object_name = "position_list"
+    template_name = "tasks/position_list.html"
 
 
 class TasksListView(generic.ListView):

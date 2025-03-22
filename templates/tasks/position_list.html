@@ -7,14 +7,14 @@
         <div class="card-header pb-0">
           <div class="row align-items-center">
             <div class="col">
-              <h6 class="mb-0 d-inline-block">Task Types</h6>
+              <h6 class="mb-0 d-inline-block">Positions</h6>
             </div>
             <div class="col text-end">
               <div class="d-flex align-items-center justify-content-end">
                 <a href="{% url 'tasks:task-type-create' %}"
                    class="btn btn-sm btn-primary mb-0">
                   <i class="fas fa-plus me-2"></i>
-                  Create Task Type
+                  Create Position
                 </a>
               </div>
             </div>
@@ -26,7 +26,7 @@
               <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-100">
-                  Task
+                  Position
                 </th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                   Update
@@ -37,20 +37,20 @@
               </tr>
               </thead>
               <tbody>
-              {% for task_type in task_type_list %}
+              {% for position in position_list %}
                 <tr>
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">
-                          {{ task_type.name }}
+                          {{ position.name }}
                         </h6>
                       </div>
                     </div>
                   </td>
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex flex-column justify-content-center">
-                      <a href="{% url 'tasks:task-type-update' pk=task_type.id %}"
+                      <a href="#"
                          class="btn btn-sm btn-outline-primary d-block mx-auto">
                         <i class="fas fa-edit me-2"></i>
                         Update
@@ -59,7 +59,7 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex flex-column justify-content-center">
-                      <a href="{% url 'tasks:task-type-delete' pk=task_type.id %}"
+                      <a href="#"
                          class="btn btn-sm btn-outline-primary d-block mx-auto">
                         <i class="fas fa-trash me-2"></i>
                         Delete
@@ -69,7 +69,7 @@
                   {% empty %}
                 <tr>
                   <td colspan="5" class="text-center py-4">
-                    <p class="text-sm mb-0">No pending task types found</p>
+                    <p class="text-sm mb-0">No positions found</p>
                   </td>
                 </tr>
               {% endfor %}

@@ -6,6 +6,7 @@ from tasks.views import (
     TaskTypesCreateView,
     TaskTypesUpdateView,
     TaskTypesDeleteView,
+    PositionListView,
     TasksListView,
     TaskDetailView,
     TaskCreateView,
@@ -21,9 +22,22 @@ from tasks.views import (
 urlpatterns = [
     path("", index, name="index"),
     path("task-types/", TaskTypesListView.as_view(), name="task-types-list"),
-    path("task-types/create/", TaskTypesCreateView.as_view(), name="task-type-create"),
-    path("task-types/<int:pk>/update", TaskTypesUpdateView.as_view(), name="task-type-update"),
-    path("task-types/<int:pk>/delete", TaskTypesDeleteView.as_view(), name="task-type-delete"),
+    path(
+        "task-types/create/",
+        TaskTypesCreateView.as_view(),
+        name="task-type-create"
+    ),
+    path(
+        "task-types/<int:pk>/update",
+        TaskTypesUpdateView.as_view(),
+        name="task-type-update"
+    ),
+    path(
+        "task-types/<int:pk>/delete",
+        TaskTypesDeleteView.as_view(),
+        name="task-type-delete"
+    ),
+    path("positions/", PositionListView.as_view(), name="position-list"),
     path("tasks/", TasksListView.as_view(), name="task-list"),
     path("tasks/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("tasks/create/", TaskCreateView.as_view(), name="task-create"),
