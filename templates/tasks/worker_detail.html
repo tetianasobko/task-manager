@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="card-footer text-center py-3">
-          <a href="#" class="btn btn-outline-danger btn-sm">
+          <a href="{% url 'tasks:worker-delete' pk=worker.id %}" class="btn btn-outline-danger btn-sm">
             Delete Worker
           </a>
         </div>

@@ -88,3 +88,8 @@ class WorkerPositionUpdateView(generic.UpdateView):
         return reverse_lazy(
             'tasks:worker-detail', kwargs={'pk': self.object.pk}
         )
+
+
+class WorkerDeleteView(generic.DeleteView):
+    model = Worker
+    success_url = reverse_lazy("tasks:worker-list")
