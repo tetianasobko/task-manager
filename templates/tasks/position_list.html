@@ -50,7 +50,7 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex flex-column justify-content-center">
-                      <a href="#"
+                      <a href="{% url 'tasks:position-update' pk=position.id %}"
                          class="btn btn-sm btn-outline-primary d-block mx-auto">
                         <i class="fas fa-edit me-2"></i>
                         Update
@@ -59,7 +59,7 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <div class="d-flex flex-column justify-content-center">
-                      <a href="#"
+                      <a href="{% url 'tasks:position-delete' pk=position.id %}"
                          class="btn btn-sm btn-outline-primary d-block mx-auto">
                         <i class="fas fa-trash me-2"></i>
                         Delete
