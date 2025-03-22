@@ -55,6 +55,13 @@ class PositionListView(generic.ListView):
     template_name = "tasks/position_list.html"
 
 
+class PositionCreateView(generic.CreateView):
+    model = Position
+    fields = "__all__"
+    template_name = "tasks/position_form.html"
+    success_url = reverse_lazy("tasks:position-list")
+
+
 class TasksListView(generic.ListView):
     model = Task
     context_object_name = "task_list"
