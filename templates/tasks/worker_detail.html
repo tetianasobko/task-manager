@@ -14,7 +14,7 @@
                 <i class="fas fa-arrow-left me-2"></i>Back to Workers
               </a>
             </div>
-            <a href="#" class="btn btn-outline-primary icon-sm p-1">
+            <a href="{% url 'tasks:worker-update' pk=worker.id %}" class="btn btn-outline-primary icon-sm p-1">
               <i class="fas fa-edit"></i>
             </a>
           </div>

@@ -13,7 +13,8 @@ class TaskForm(forms.ModelForm):
     )
     description = forms.CharField(
         label="",
-        widget=forms.Textarea(attrs={"rows": 5, "placeholder": "Enter task description"})
+        widget=forms.Textarea(
+            attrs={"rows": 5, "placeholder": "Enter task description"})
     )
     deadline = forms.DateTimeField(
         label="",
@@ -27,10 +28,17 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ['name', 'description', 'task_type', 'priority', 'deadline', 'assignees']
+        fields = [
+            "name",
+            "description",
+            "task_type",
+            "priority",
+            "deadline",
+            "assignees"
+        ]
         labels = {
-            'task_type': '',
-            'priority': '',
+            "task_type": "",
+            "priority": "",
         }
 
 
@@ -60,7 +68,6 @@ class WorkerCreateForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={"placeholder": "Confirm password"}),
     )
 
-
     class Meta(UserCreationForm.Meta):
         model = Worker
         fields = UserCreationForm.Meta.fields + (
@@ -69,6 +76,16 @@ class WorkerCreateForm(UserCreationForm):
             "email",
             "position",
         )
+
+        labels = {
+            "position": ""
+        }
+
+
+class WorkerPositionUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ["position"]
 
         labels = {
             "position": ""
