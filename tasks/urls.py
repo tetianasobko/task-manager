@@ -19,7 +19,8 @@ from tasks.views import (
     WorkerDetailView,
     WorkerCreateView,
     WorkerPositionUpdateView,
-    WorkerDeleteView
+    WorkerDeleteView,
+    toggle_complete_to_task,
 )
 
 urlpatterns = [
@@ -62,6 +63,11 @@ urlpatterns = [
         "tasks/<int:pk>/delete/",
         TaskDeleteView.as_view(),
          name="task-delete"
+    ),
+    path(
+        "tasks/<int:pk>/toggle-complete",
+        toggle_complete_to_task,
+        name="toggle-task-complete"
     ),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
     path("workers/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),

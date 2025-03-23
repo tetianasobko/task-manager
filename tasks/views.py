@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -149,3 +150,10 @@ class WorkerPositionUpdateView(generic.UpdateView):
 class WorkerDeleteView(generic.DeleteView):
     model = Worker
     success_url = reverse_lazy("tasks:worker-list")
+
+
+def toggle_complete_to_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.is_completed = not task.is_completed
+    task.save()
+    return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[pk]))
