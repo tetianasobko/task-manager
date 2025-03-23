@@ -1,0 +1,55 @@
+{% if is_paginated %}
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link bg-soft-primary border-0 shadow-sm" 
+           href="?page={{ page_obj.previous_page_number }}">
+          &laquo;
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link bg-soft-secondary border-0 shadow-sm">
+          &laquo;
+        </span>
+      </li>
+    {% endif %}
+
+    {% for num in paginator.page_range %}
+      {% if num >= page_obj.number|add:"-1" and num <= page_obj.number|add:"1" %}
+        {% if page_obj.number == num %}
+          <li class="page-item active">
+            <span class="page-link bg-soft-primary border-0 shadow-sm text-white">
+              {{ num }}
+            </span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link bg-soft-primary border-0 shadow-sm" 
+               href="?page={{ num }}">
+              {{ num }}
+            </a>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link bg-soft-primary border-0 shadow-sm" 
+           href="?page={{ page_obj.next_page_number }}">
+          &raquo;
+        </a>
+      </li>
+      
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link bg-soft-secondary border-0 shadow-sm">
+          &raquo;
+        </span>
+      </li>
+    {% endif %}
+
+  </ul>
+{% endif %}

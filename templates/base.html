@@ -28,6 +28,8 @@
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
   <div class="container-fluid py-4">
     {% block content %}{% endblock %}
+      {% include "includes/pagination.html" %}
+    {% block pagination %}{% endblock %}
   </div>
 </main>
 

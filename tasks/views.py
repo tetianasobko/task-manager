@@ -27,6 +27,7 @@ class TaskTypesListView(generic.ListView):
     model = TaskType
     context_object_name = "task_type_list"
     template_name = "tasks/task_type_list.html"
+    paginate_by = 9
 
 
 class TaskTypesCreateView(generic.CreateView):
@@ -53,6 +54,7 @@ class PositionListView(generic.ListView):
     model = Position
     context_object_name = "position_list"
     template_name = "tasks/position_list.html"
+    paginate_by = 9
 
 
 class PositionCreateView(generic.CreateView):
@@ -79,6 +81,7 @@ class TasksListView(generic.ListView):
     model = Task
     context_object_name = "task_list"
     template_name = "tasks/task_list.html"
+    paginate_by = 9
 
 
 class TaskDetailView(generic.DetailView):
@@ -111,6 +114,7 @@ class WorkerListView(generic.ListView):
     model = Worker
     context_object_name = "worker_list"
     template_name = "tasks/worker_list.html"
+    paginate_by = 9
 
 
 class WorkerDetailView(generic.DetailView):
