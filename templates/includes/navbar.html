@@ -68,8 +68,8 @@
           </h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
-             href="#">
+          <a class="nav-link {% if request.resolver_match.url_name == 'worker-detail' and request.resolver_match.kwargs.pk|stringformat:'s' == user.id|stringformat:'s' %}active{% endif %}"
+             href="{% url 'tasks:worker-detail' pk=user.id %}">
             <div
                 class="icon icon-shape icon-sm shadow rounded-circle bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-user"></i>
