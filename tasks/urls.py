@@ -25,7 +25,7 @@ from tasks.views import (
 
 urlpatterns = [
     path("", index, name="index"),
-    path("task-types/", TaskTypesListView.as_view(), name="task-types-list"),
+    path("task-types/", TaskTypesListView.as_view(), name="task-type-list"),
     path(
         "task-types/create/",
         TaskTypesCreateView.as_view(),
@@ -44,12 +44,12 @@ urlpatterns = [
     path("positions/", PositionListView.as_view(), name="position-list"),
     path("positions/create/", PositionCreateView.as_view(), name="position-create"),
     path(
-        "positions/<int:pk>/update",
+        "positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
         name="position-update"
     ),
     path(
-        "positions/<int:pk>/delete",
+        "positions/<int:pk>/delete/",
         PositionDeleteView.as_view(),
         name="position-delete"
     ),
@@ -65,7 +65,7 @@ urlpatterns = [
          name="task-delete"
     ),
     path(
-        "tasks/<int:pk>/toggle-complete",
+        "tasks/<int:pk>/toggle-complete/",
         toggle_complete_to_task,
         name="toggle-task-complete"
     ),
