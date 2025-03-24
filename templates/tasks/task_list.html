@@ -1,22 +1,31 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 {% load priority_badge %}
 {% load get_initials %}
 
 {% block content %}
   <div class="row mt-4">
     <div class="col-12">
+      <h3 class="mb-3">Tasks</h3>
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h6 class="mb-0 d-inline-block">Tasks</h6>
+          <div class="row align-items-stretch">
+            <div class="col-md-8 d-flex">
+              <form method="get" class="d-flex w-100">
+                <div class="position-relative w-100">
+                  {{ search_form.name|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-primary ms-2">
+                  Search
+                </button>
+              </form>
             </div>
-            <div class="col text-end">
-              <div class="d-flex align-items-center justify-content-end">
-                <a href="{% url 'tasks:task-create' %}" class="btn btn-sm btn-primary mb-0">
-                  <i class="fas fa-plus me-2"></i>Create Task
-                </a>
-              </div>
+            <div class="col-md-4 d-flex justify-content-end align-items-stretch">
+              <a href="{% url 'tasks:task-create' %}"
+                 class="btn btn-sm btn-primary header-btn d-flex align-items-center">
+                <i class="fas fa-plus me-2"></i>
+                Create Task
+              </a>
             </div>
           </div>
         </div>
@@ -54,7 +63,9 @@
                             {{ task.name }}
                           </a>
                         </h6>
-                        <p class="text-xs text-secondary mb-0">{{ task.task_type }}</p>
+                        <p class="text-xs text-secondary mb-0">
+                          {{ task.task_type }}
+                        </p>
                       </div>
                     </div>
                   </td>
@@ -85,14 +96,12 @@
                     <span class="text-secondary text-xs font-weight-bold">
                       {{ task.deadline|date:"M d, Y" }}
                     </span>
-                    <span
-                        class="text-secondary text-xxs opacity-7 d-block mt-0">
+                    <span class="text-secondary text-xxs opacity-7 d-block mt-0">
                       {{ task.deadline|date:"g:i A" }}
                     </span>
                   </td>
                   <td class="align-middle text-center">
-                    <span
-                        class="badge bg-gradient-{{ task.is_completed|yesno:'success,warning' }} badge-sm">
+                    <span class="badge bg-gradient-{{ task.is_completed|yesno:'success,warning' }} badge-sm">
                       {{ task.is_completed|yesno:'Completed,Pending' }}
                     </span>
                   </td>

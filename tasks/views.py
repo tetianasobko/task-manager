@@ -4,7 +4,12 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import TaskForm, WorkerCreateForm, WorkerPositionUpdateForm
+from tasks.forms import (
+    TaskForm,
+    WorkerCreateForm,
+    WorkerPositionUpdateForm,
+    TaskSearchForm
+)
 from tasks.models import Task, Worker, TaskType, Position
 
 
@@ -83,6 +88,21 @@ class TasksListView(generic.ListView):
     context_object_name = "task_list"
     template_name = "tasks/task_list.html"
     paginate_by = 9
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = TaskSearchForm(initial={"name": name})
+        return context
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        form = TaskSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
 
 
 class TaskDetailView(generic.DetailView):
