@@ -13,7 +13,8 @@
               </p>
             </div>
             <div class="col text-end">
-              <a href="{% url 'tasks:task-types-list' %}" class="btn btn-sm btn-outline-secondary">
+              <a href="{% url 'tasks:task-types-list' %}" 
+                 class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>Back to Task Types
               </a>
             </div>
@@ -30,7 +31,8 @@
                 <h6 class="alert-heading mb-1">Warning</h6>
                 <p class="mb-0">
                   You are about to delete task type
-                  "<strong>{{ object.name }}</strong>". This action cannot be undone.
+                  "<strong>{{ tasktype.name }}</strong>". 
+                  This action cannot be undone.
                 </p>
               </div>
             </div>
@@ -44,7 +46,7 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <p class="text-sm mb-1">
-                    <strong>Name:</strong> {{ object.name }}
+                    <strong>Name:</strong> {{ tasktype.name }}
                   </p>
                 </div>
               </div>
@@ -54,7 +56,8 @@
           <form method="post">
             {% csrf_token %}
             <div class="d-flex justify-content-start gap-2">
-              <a href="{% url 'tasks:task-types-list' %}" class="btn btn-outline-secondary">
+              <a href="{% url 'tasks:task-types-list' %}" 
+                 class="btn btn-outline-secondary">
                 <i class="fas fa-times me-2"></i>Cancel
               </a>
               <button type="submit" class="btn btn-danger">

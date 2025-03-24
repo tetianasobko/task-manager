@@ -10,7 +10,7 @@
         <div class="row align-items-center">
           <div class="col">
             <h5 class="mb-0">
-              {% if form.instance.pk %}Edit Task{% else %}New Task{% endif %}
+              {{ form.instance.pk|yesno:"Edit,New" }} Task
             </h5>
           </div>
           <div class="col text-end">
@@ -31,25 +31,35 @@
                 </div>
                 <div class="card-body">
                   <div class="mb-3">
-                    <label class="form-label text-xs text-uppercase font-weight-bolder">Name</label>
+                    <label class="form-label text-xs text-uppercase font-weight-bolder">
+                      Name
+                    </label>
                     {{ form.name|as_crispy_field }}
                   </div>
                   <div class="mb-3">
-                    <label class="form-label text-xs text-uppercase font-weight-bolder">Description</label>
+                    <label class="form-label text-xs text-uppercase font-weight-bolder">
+                      Description
+                    </label>
                     {{ form.description|as_crispy_field }}
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-6">
-                      <label class="form-label text-xs text-uppercase font-weight-bolder">Type</label>
+                      <label class="form-label text-xs text-uppercase font-weight-bolder">
+                        Type
+                      </label>
                       {{ form.task_type|as_crispy_field }}
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label text-xs text-uppercase font-weight-bolder">Priority</label>
+                      <label class="form-label text-xs text-uppercase font-weight-bolder">
+                        Priority
+                      </label>
                       {{ form.priority|as_crispy_field }}
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label class="form-label text-xs text-uppercase font-weight-bolder">Deadline</label>
+                    <label class="form-label text-xs text-uppercase font-weight-bolder">
+                      Deadline
+                    </label>
                     {{ form.deadline|as_crispy_field }}
                   </div>
                 </div>
@@ -71,7 +81,8 @@
               <i class="fas fa-times me-2"></i>Cancel
             </a>
             <button type="submit" class="btn bg-gradient-primary">
-              <i class="fas fa-save me-2"></i>{% if form.instance.pk %}Update{% else %}Create{% endif %} Task
+              <i class="fas fa-save me-2"></i>
+              {{ form.instance.pk|yesno:"Update,Create" }} Task
             </button>
           </div>
         </form>

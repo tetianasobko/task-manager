@@ -31,8 +31,8 @@
                 <h6 class="alert-heading mb-1">Warning</h6>
                 <p class="mb-0">
                   You are about to delete task
-                  "<strong>{{ task.name }}</strong>". This action cannot be
-                  undone.
+                  "<strong>{{ task.name }}</strong>". 
+                  This action cannot be undone.
                 </p>
               </div>
             </div>
@@ -45,11 +45,14 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <p class="text-sm mb-1">
-                    <strong>Name:</strong> {{ task.name }}</p>
+                    <strong>Name:</strong> {{ task.name }}
+                  </p>
                   <p class="text-sm mb-1">
-                    <strong>Type:</strong> {{ task.task_type }}</p>
+                    <strong>Type:</strong> {{ task.task_type }}
+                  </p>
                   <p class="text-sm mb-0">
-                    <strong>Priority:</strong> {{ task.priority }}</p>
+                    <strong>Priority:</strong> {{ task.priority }}
+                  </p>
                 </div>
                 <div class="col-md-6">
                   <p class="text-sm mb-1">
@@ -59,7 +62,8 @@
                     <strong>Status:</strong> {{ task.is_completed|yesno:"Completed,Pending" }}
                   </p>
                   <p class="text-sm mb-0">
-                    <strong>Assignees:</strong> {{ task.assignees.count }}</p>
+                    <strong>Assignees:</strong> {{ task.assignees.count }}
+                  </p>
                 </div>
               </div>
             </div>

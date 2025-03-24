@@ -13,7 +13,8 @@
               </h5>
             </div>
             <div class="col text-end">
-              <a href="{% url 'tasks:task-types-list' %}" class="btn btn-sm btn-outline-secondary">
+              <a href="{% url 'tasks:task-types-list' %}" 
+                 class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>
                 Back to Task Types
               </a>
@@ -25,7 +26,8 @@
             {% csrf_token %}
             {{ form|crispy }}
             <br>
-              <a href="{% url 'tasks:task-types-list' %}" class="btn btn-outline-secondary me-2">
+              <a href="{% url 'tasks:task-types-list' %}" 
+                 class="btn btn-outline-secondary me-2">
                 <i class="fas fa-times me-2"></i>
                 Cancel
               </a>

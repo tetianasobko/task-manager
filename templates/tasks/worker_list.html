@@ -22,7 +22,8 @@
             </div>
             <div class="col-md-4 d-flex justify-content-end align-items-stretch">
               <a href="{% url 'tasks:worker-create' %}"
-                 class="btn btn-sm btn-primary header-btn d-flex align-items-center">
+                 class="btn btn-sm btn-primary text-center py-2"
+                 style="line-height: 1.9; display: inline-block;">
                 <i class="fas fa-plus me-2"></i>
                 Create Worker
               </a>
@@ -63,7 +64,9 @@
                           <h6 class="mb-0 text-sm task-link">
                             {{ worker.first_name }} {{ worker.last_name }}
                           </h6>
-                          <p class="text-xs text-secondary mb-0">{{ worker.email }}</p>
+                          <p class="text-xs text-secondary mb-0">
+                            {{ worker.email }}
+                          </p>
                         </a>
                       </div>
                     </div>
