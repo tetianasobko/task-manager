@@ -8,7 +8,8 @@ from tasks.forms import (
     TaskForm,
     WorkerCreateForm,
     WorkerPositionUpdateForm,
-    TaskSearchForm
+    TaskSearchForm,
+    WorkerSearchForm
 )
 from tasks.models import Task, Worker, TaskType, Position
 
@@ -136,6 +137,24 @@ class WorkerListView(generic.ListView):
     context_object_name = "worker_list"
     template_name = "tasks/worker_list.html"
     paginate_by = 9
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = WorkerSearchForm(
+            initial={"username": username}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Worker.objects.all()
+        form = WorkerSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"])
+        return queryset
 
 
 class WorkerDetailView(generic.DetailView):
