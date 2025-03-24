@@ -19,6 +19,9 @@ class Position(models.Model):
 class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ["position", "last_name"]
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -38,6 +41,9 @@ class Task(models.Model):
     priority = models.CharField(max_length=255, choices=PRIORITY_CHOICES)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(Worker, related_name="tasks")
+
+    class Meta:
+        ordering = ["deadline", "priority"]
 
     def __str__(self):
         return self.name
