@@ -78,19 +78,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-sign-out-alt"></i>
-            </div>
-            <span class="nav-link-text ms-1">Logout</span>
-          </a>
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="nav-link">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fas fa-sign-out-alt"></i>
+              </div>
+              <span class="nav-link-text ms-1">Logout</span>
+            </button>
+          </form>
         </li>
       {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" 
+             href="{% url 'login' %}?next={{ request.path }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-sign-in-alt"></i>
             </div>
             <span class="nav-link-text ms-1">Login</span>
