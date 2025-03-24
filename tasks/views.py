@@ -9,7 +9,7 @@ from tasks.forms import (
     WorkerCreateForm,
     WorkerPositionUpdateForm,
     TaskSearchForm,
-    WorkerSearchForm
+    WorkerSearchForm, PositionSearchForm
 )
 from tasks.models import Task, Worker, TaskType, Position
 
@@ -77,6 +77,21 @@ class PositionListView(generic.ListView):
     context_object_name = "position_list"
     template_name = "tasks/position_list.html"
     paginate_by = 9
+
+    def get_context_data(self, **kwargs):
+        context = super(PositionListView, self).get_context_data(**kwargs)
+
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = PositionSearchForm(initial={"name": name})
+        return context
+
+    def get_queryset(self):
+        queryset = Position.objects.all()
+        form = TaskSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
 
 
 class PositionCreateView(generic.CreateView):
