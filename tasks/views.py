@@ -17,7 +17,7 @@ from tasks.models import Task, Worker, TaskType, Position
 def index(request):
     pending_tasks = (
         Task.objects.filter(is_completed=False)
-        .order_by('-priority', 'deadline')
+        .order_by("deadline", '-priority')[:7]
     )
 
     context = {
