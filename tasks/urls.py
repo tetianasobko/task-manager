@@ -42,7 +42,11 @@ urlpatterns = [
         name="task-type-delete"
     ),
     path("positions/", PositionListView.as_view(), name="position-list"),
-    path("positions/create/", PositionCreateView.as_view(), name="position-create"),
+    path(
+        "positions/create/",
+        PositionCreateView.as_view(),
+        name="position-create"
+    ),
     path(
         "positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
@@ -70,7 +74,9 @@ urlpatterns = [
         name="toggle-task-complete"
     ),
     path("workers/", WorkerListView.as_view(), name="worker-list"),
-    path("workers/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
+    path(
+        "workers/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"
+    ),
     path("workers/create/", WorkerCreateView.as_view(), name="worker-create"),
     path(
         "workers/<int:pk>/update/",

@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def get_initials(worker):
     if worker.first_name and worker.last_name:
