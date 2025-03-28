@@ -2,9 +2,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import TemplateView
 
 from tasks.forms import (
     TaskForm,
@@ -17,21 +17,19 @@ from tasks.forms import (
 from tasks.models import Task, Worker, TaskType, Position
 
 
-@login_required
-def index(request):
-    pending_tasks = (
-        Task.objects.filter(is_completed=False)
-        .order_by("deadline", '-priority')[:7]
-    )
+class Index(LoginRequiredMixin, TemplateView):
+    template_name = "tasks/index.html"
 
-    context = {
-        "num_tasks": Task.objects.count(),
-        "num_workers": Worker.objects.count(),
-        "num_task_types": TaskType.objects.count(),
-        "num_positions": Position.objects.count(),
-        "pending_tasks": pending_tasks,
-    }
-    return render(request, "tasks/index.html", context=context)
+    def get_context_data(self, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
+        context["num_tasks"] = Task.objects.count()
+        context["num_workers"] = Worker.objects.count()
+        context["num_task_types"] = TaskType.objects.count()
+        context["num_positions"] = Position.objects.count()
+        context["pending_tasks"] = Task.objects.filter(
+            is_completed=False
+        ).order_by("deadline", "-priority")[:7]
+        return context
 
 
 class TaskTypesListView(LoginRequiredMixin, generic.ListView):
@@ -41,7 +39,7 @@ class TaskTypesListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 9
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(TaskTypesListView, self).get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
 
@@ -125,7 +123,7 @@ class TasksListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 9
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(TasksListView, self).get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
 
@@ -173,7 +171,7 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 9
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(WorkerListView, self).get_context_data(**kwargs)
 
         username = self.request.GET.get("username", "")
 
@@ -196,7 +194,7 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "tasks/worker_detail.html"
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(WorkerDetailView, self).get_context_data(**kwargs)
         context["completed_tasks"] = self.object.tasks.filter(
             is_completed=True).count()
         return context
