@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h5 class="mb-0">
+                {{ form.instance.pk|yesno:"Update,Create" }} Position
+              </h5>
+            </div>
+            <div class="col text-end">
+              <a href="{% url 'tasks:position-list' %}" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>
+                Back to Positions
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+              <a href="{% url 'tasks:position-list' %}" class="btn btn-outline-secondary me-2">
+                <i class="fas fa-times me-2"></i>
+                Cancel
+              </a>
+              <button type="submit" class="btn bg-gradient-primary">
+                <i class="fas fa-save me-2"></i>
+                {{ form.instance.pk|yesno:"Update,Create" }} Position
+              </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
