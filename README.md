@@ -43,4 +43,10 @@ tasks, set deadlines, and categorize tasks based on priority.
 
 ## Demo
 
-![img.png](img.png)
+You can view a live demo of the Task Manager project here: [Live Demo](https://task-manager-kgym.onrender.com)
+
+For testing purposes, you can use the following credentials to log in:
+
+Login: admin 
+
+Password: 1qazcde3
